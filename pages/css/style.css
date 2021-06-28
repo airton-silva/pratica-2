@@ -19,3 +19,9 @@ header {
   .fade-enter, .fade-leave-to /* .fade-leave-active em versões anteriores a 2.1.8 */ {
     opacity: 0;
   }
+
+  h6{
+    
+    text-align: center;
+    font-size: 35px;
+  }
