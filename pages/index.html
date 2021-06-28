@@ -53,22 +53,27 @@
                         <div class="mb-3">
                             <label for="ldescriao" class="form-label">Descrição</label>
                             <input type="text"   class="form-control" v-model="imovel.descricao">
+                            
                         </div>
                         <div class="mb-3">
                             <label for="fquartos" class="form-label">quartos</label>
-                            <input type="text"   class="form-control" v-model="imovel.quartos">
+                            <input type="number"   class="form-control" v-model="imovel.quartos">
+                            <span v-if="imovel.quartos < 0" class="alert alert-danger"> Valor Para o Campo Quartos não pode ser Negativo</span>
                         </div>
                         <div class="mb-3">
                             <label for="lvagaG" class="form-label">Vaga de Garagem</label>
-                            <input type="text"   class="form-control" v-model="imovel.vagaG">
+                            <input type="number"   class="form-control" v-model="imovel.vagaG">
+                            <span v-if="imovel.vagaG < 0" class="alert alert-danger"> Valor Para o Campo Vaga de Garagem não pode ser Negativo</span>
                         </div>
                         <div class="mb-3">
                             <label for="lareaT" class="form-label">Área do Terreno</label>
-                            <input type="text"   class="form-control" v-model="imovel.areaT">
+                            <input type="number"   class="form-control" v-model="imovel.areaT">
+                            <span v-if="imovel.areaT < 0" class="alert alert-danger"> Valor Para o Campo Area Do Terreno não pode ser Negativo</span>
                         </div>
                         <div class="mb-3">
                             <label for="lareaC" class="form-label">Área Construida</label>
-                            <input type="text"   class="form-control" v-model="imovel.areaC">
+                            <input type="number"   class="form-control" v-model="imovel.areaC">
+                            <span v-if="imovel.areaC < 0" class="alert alert-danger"> Valor Para o Campo Area Contruida não pode ser Negativo</span>
                         </div>
                         <div class="mb-3">
                             <label for="llocalidade" class="form-label">Localidade</label>
@@ -76,7 +81,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="lpreco" class="form-label">Preço</label>
-                            <input type="text"   class="form-control" v-model="imovel.preco">                            
+                            <input type="number"   class="form-control" v-model="imovel.preco">   
+                            <span v-if="imovel.preco < 0" class="alert alert-danger"> Valor Para o Campo Preço não pode ser Negativo</span>                         
                         </div>
                         <div class="mb-3">
                             <label for="limage" class="form-label">Link da imagem</label>
