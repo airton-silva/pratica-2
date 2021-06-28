@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    
+    <title>Imoveis SA</title>
+    
+</head>
+<body>
+    <div class="container">
+
+        <div class="py-5 text-center">
+           
+            <header>
+                <h2>Imoveis SA</h2>
+            </header>
+            
+          </div>
+
+          <div class="row" id ="app">
+            
+                <div class="col-md-4">
+                    <nav class="navbar navbar-light bg-light">
+                        <ul>
+                          <li><a type="button"  @click="show = !show">Cadastrar</a></li>
+                          <li><a type="button" @click="show = !show" id="list">Listar</a></li>
+
+                        </ul>
+                      </nav>
+                </div>
+                
+                <div class="col-md-6 col-lg-6">
+          
+                  <div id="" v-if="show">
+                      <form id="form" >
+                        <div class="mb-3">
+                            <label for="ftitulo" class="form-label">Titulo</label>
+                            <input type="text"  class="form-control" v-model="imovel.titulo">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ldescriao" class="form-label">Descrição</label>
+                            <input type="text"   class="form-control" v-model="imovel.descricao">
+                        </div>
+                        <div class="mb-3">
+                            <label for="fquartos" class="form-label">quartos</label>
+                            <input type="text"   class="form-control" v-model="imovel.quartos">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lvagaG" class="form-label">Vaga de Garagem</label>
+                            <input type="text"   class="form-control" v-model="imovel.vagaG">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lareaT" class="form-label">Área do Terreno</label>
+                            <input type="text"   class="form-control" v-model="imovel.areaT">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lareaC" class="form-label">Área Construida</label>
+                            <input type="text"   class="form-control" v-model="imovel.areaC">
+                        </div>
+                        <div class="mb-3">
+                            <label for="llocalidade" class="form-label">Localidade</label>
+                            <input type="text"   class="form-control" v-model="imovel.localidade">
+                        </div>
+                        <div class="mb-3">
+                            <label for="lpreco" class="form-label">Preço</label>
+                            <input type="text"   class="form-control" v-model="imovel.preco">                            
+                        </div>
+                        <div class="mb-3">
+                            <label for="limage" class="form-label">Link da imagem</label>
+                            <input type="text" name="image" class="form-control" v-model="imovel.image">                            
+                        </div>
+                        <div class="mb-3">
+                            <input type="submit" class="btn btn-success" value="Salvar" v-on:click.prevent="saveImoveis(imovel)">
+                            <input type="button" class="btn btn-default" value="Limpar" v-on:click.prevent= "limpaForm"> 
+                          
+                                                     
+                        </div>
+                    
+                      </form>
+                  </div>
+          
+                  <h1>Lista de Imoveis</h1>
+
+                  <div class="card" v-for="imovel in imoveis">
+                    <div class="card-body">
+                        <span> <strong>Titulo:  </strong>   {{imovel.titulo}}</span><br>
+                        <span><strong>Descrição:  </strong> {{imovel.descricao}}</span><br>
+                        <span><strong>Quantidade de Quartos:   </strong> {{imovel.quartos}}</span><br>
+                        <span><strong>Vaga Garagem:   </strong> {{imovel.vagaG}}</span><br>
+                        <span><strong>Area do terreno:   </strong> {{imovel.areaT}}</span><br>
+                        <span><strong>Area Construida:   </strong> {{imovel.areaC}}</span><br>
+                        <span><strong>Localidade:   </strong> {{imovel.localidade}}</span><br>
+                        <span><strong>Preço:   </strong> {{imovel.preco}}</span><br>
+                        <img :src="imovel.image" class="img-fluid" alt="">
+                    </div>
+                  </div>
+
+                </div>
+             
+          </div>
+
+          <footer>
+            <p>Footer</p>
+          </footer>
+    </div>
+   
+
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                imoveis: [],                 
+                show: false,
+               //name:'imoveis App',
+                imovel: {
+                    titulo: '', 
+                    descricao: '', 
+                    quartos: '', 
+                    vagaG: '', 
+                    areaT: '', 
+                    areaC: '',
+                    localidade: '', 
+                    preco: '', 
+                    image: ''
+                }
+   
+            },         
+
+
+            methods: {
+
+               saveImoveis(imovel){
+                    let imoveis = localStorage.getItem('imoveisApp');
+
+                    if(imoveis) {
+
+                        imoveis= JSON.parse(imoveis);
+                        imoveis.push(imovel);
+
+                    }else {
+                        imoveis = [imovel]
+                    }
+
+                    localStorage.setItem('imoveisApp', JSON.stringify(imoveis))
+                },
+
+                limpaForm () {
+                    for (field in this.imovel) this.imovel[field] = "";
+                },
+                
+            },
+
+            created() {
+                this.imoveis = JSON.parse(localStorage.getItem('imoveisApp'));
+                
+            },
+
+
+         })
+
+    </script>
+    
+    </body>
+</html>
